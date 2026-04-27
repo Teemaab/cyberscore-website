@@ -20,6 +20,12 @@
   <meta name="twitter:title"      content="CyberScore — Sécurité informatique pour les entreprises d'Afrique francophone">
   <meta name="twitter:description" content="Analysez la sécurité de vos ordinateurs Windows en 3 minutes. Score clair, recommandations concrètes en français — sans informaticien dédié.">
 
+  <!-- Security meta tags -->
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy"
+        content="upgrade-insecure-requests; object-src 'none'; frame-src 'none';">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+
   <!-- Favicon -->
   <link rel="icon" href="logo.png">
 
@@ -242,21 +248,22 @@
      1. NAVBAR
 ══════════════════════════════════════════════════ -->
 <nav id="navbar" x-data="{ open: false }"
-     class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm transition-shadow duration-300">
+     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+     style="background:#0A0F1E;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
 
-      <!-- Logo -->
+      <!-- Logo — blends seamlessly into dark bg, no visible border -->
       <a href="#" class="flex-shrink-0">
         <img src="logo.png" alt="CyberScore" class="h-10 w-auto">
       </a>
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-7">
-        <a href="#demo"            class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Démo</a>
-        <a href="#solution"        class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Solution</a>
-        <a href="#fonctionnalites" class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Fonctionnalités</a>
-        <a href="#tarifs"          class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Tarifs</a>
+        <a href="#demo"            class="text-sm font-medium transition-colors" style="color:rgba(255,255,255,0.65);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Démo</a>
+        <a href="#solution"        class="text-sm font-medium transition-colors" style="color:rgba(255,255,255,0.65);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Solution</a>
+        <a href="#fonctionnalites" class="text-sm font-medium transition-colors" style="color:rgba(255,255,255,0.65);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Fonctionnalités</a>
+        <a href="#tarifs"          class="text-sm font-medium transition-colors" style="color:rgba(255,255,255,0.65);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Tarifs</a>
       </div>
 
       <!-- Desktop CTA -->
@@ -267,7 +274,8 @@
 
       <!-- Hamburger -->
       <button @click="open=!open" :aria-expanded="open.toString()" aria-controls="mobile-menu"
-              class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100" aria-label="Menu">
+              class="md:hidden p-2 rounded-lg transition-colors" style="color:rgba(255,255,255,0.7);"
+              aria-label="Menu">
         <svg x-show="!open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -278,7 +286,7 @@
     </div>
   </div>
 
-  <!-- Mobile menu -->
+  <!-- Mobile menu — dark theme matching navbar -->
   <div id="mobile-menu" x-show="open" x-cloak
        x-transition:enter="transition ease-out duration-200"
        x-transition:enter-start="opacity-0 -translate-y-2"
@@ -286,17 +294,33 @@
        x-transition:leave="transition ease-in duration-150"
        x-transition:leave-start="opacity-100 translate-y-0"
        x-transition:leave-end="opacity-0 -translate-y-2"
-       class="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-1">
-    <a href="#demo"            @click="open=false" class="block px-4 py-2.5 rounded-lg text-gray-700 font-medium hover:bg-gray-50">Démo</a>
-    <a href="#solution"        @click="open=false" class="block px-4 py-2.5 rounded-lg text-gray-700 font-medium hover:bg-gray-50">Solution</a>
-    <a href="#fonctionnalites" @click="open=false" class="block px-4 py-2.5 rounded-lg text-gray-700 font-medium hover:bg-gray-50">Fonctionnalités</a>
-    <a href="#tarifs"          @click="open=false" class="block px-4 py-2.5 rounded-lg text-gray-700 font-medium hover:bg-gray-50">Tarifs</a>
+       class="md:hidden px-4 py-4 space-y-1"
+       style="background:#0A0F1E; border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="#demo"            @click="open=false" class="block px-4 py-2.5 rounded-lg font-medium transition-colors" style="color:rgba(255,255,255,0.75);" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background=''">Démo</a>
+    <a href="#solution"        @click="open=false" class="block px-4 py-2.5 rounded-lg font-medium transition-colors" style="color:rgba(255,255,255,0.75);" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background=''">Solution</a>
+    <a href="#fonctionnalites" @click="open=false" class="block px-4 py-2.5 rounded-lg font-medium transition-colors" style="color:rgba(255,255,255,0.75);" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background=''">Fonctionnalités</a>
+    <a href="#tarifs"          @click="open=false" class="block px-4 py-2.5 rounded-lg font-medium transition-colors" style="color:rgba(255,255,255,0.75);" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background=''">Tarifs</a>
     <a href="#contact"         @click="open=false"
        class="block w-full mt-2 bg-brand hover:bg-brand-light text-white font-bold px-4 py-3 rounded-xl text-center transition-colors">
       Demander un diagnostic
     </a>
   </div>
 </nav>
+
+<!-- Mobile sticky CTA — CRO fix: zero persistent CTA on mobile after hero scrolls off -->
+<div id="mobileCta"
+     class="md:hidden fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full"
+     style="background:#0A0F1E; border-top:1px solid rgba(255,255,255,0.1); padding:12px 16px 16px;">
+  <a href="#contact"
+     class="flex items-center justify-center gap-2 w-full text-white font-bold rounded-xl text-sm"
+     style="background:#E8620A; padding:14px 20px;"
+     onclick="gaTrack('mobile_sticky_cta')">
+    Diagnostic gratuit — Réponse sous 24h
+    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+    </svg>
+  </a>
+</div>
 
 <main id="main-content">
 
@@ -367,7 +391,7 @@
         </div>
 
         <!-- Risk-reversal — reduces CTA friction for buyers unfamiliar with SaaS subscriptions -->
-        <p class="text-xs -mt-7 mb-10" style="color:rgba(255,255,255,0.35);">
+        <p class="text-xs -mt-7 mb-10" style="color:rgba(255,255,255,0.6);">
           Sans engagement · Réponse sous 24h · Paiement après validation du diagnostic
         </p>
 
@@ -681,6 +705,9 @@
 
           <!-- Checks -->
           <div id="demoChecks" class="space-y-1.5 mb-5 min-h-0"></div>
+
+          <!-- Micro-copy — sets expectation before click (reduces hesitation) -->
+          <p class="text-center text-gray-600 text-xs mb-3 font-mono">↓ Simulation sur un ordinateur test — 30 secondes, sans installation</p>
 
           <!-- Scan button -->
           <button id="scanBtn" onclick="demo.start()"
@@ -1034,6 +1061,24 @@
 
 
 <!-- ══════════════════════════════════════════════
+     7b. BRIDGE — Testimonials → Pricing
+══════════════════════════════════════════════════ -->
+<div class="py-10 bg-white border-t border-gray-100">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-fade">
+    <p class="text-lg font-semibold text-navy mb-4">Ces résultats sont disponibles pour votre entreprise — dès ce mois-ci.</p>
+    <a href="#tarifs"
+       class="inline-flex items-center gap-2 font-bold rounded-xl transition-colors duration-200 text-white text-sm"
+       style="background:#E8620A; padding:12px 24px;">
+      Voir les tarifs
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
      8. TARIFS
 ══════════════════════════════════════════════════ -->
 <section id="tarifs" class="py-20 md:py-28 bg-white">
@@ -1185,6 +1230,25 @@
               </svg>
             </div>
             <span>Réponse sous 24h ouvrées</span>
+          </div>
+        </div>
+
+        <!-- What happens next — sets expectations, reduces form abandonment -->
+        <div class="mt-8 pt-8 border-t border-white/10">
+          <p class="text-white/40 text-xs font-bold uppercase tracking-widest mb-4">Ce qui se passe après votre message</p>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#E8620A;">1</div>
+              <p class="text-white/60 text-sm leading-relaxed">On vous répond sous 24h pour fixer un appel de 20 min</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#E8620A;">2</div>
+              <p class="text-white/60 text-sm leading-relaxed">Diagnostic gratuit sur vos ordinateurs — vous voyez votre score</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#E8620A;">3</div>
+              <p class="text-white/60 text-sm leading-relaxed">Vous décidez librement — sans pression, sans engagement</p>
+            </div>
           </div>
         </div>
 
@@ -1421,8 +1485,28 @@
   function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
 
   // ── Navbar shadow ────────────────────────────────
+  // Mobile sticky CTA: slide in after hero scrolls past viewport
+  (function() {
+    var mobileCta = document.getElementById('mobileCta');
+    if (!mobileCta) return;
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > window.innerHeight * 0.6) {
+        mobileCta.style.transform = 'translateY(0)';
+      } else {
+        mobileCta.style.transform = 'translateY(100%)';
+      }
+    }, { passive: true });
+  })();
+
   window.addEventListener('scroll', function() {
-    document.getElementById('navbar').classList.toggle('shadow-md', window.scrollY > 20);
+    var nb = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nb.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
+      nb.style.boxShadow = '0 4px 24px rgba(0,0,0,0.4)';
+    } else {
+      nb.style.borderBottom = '';
+      nb.style.boxShadow = '';
+    }
   }, { passive: true });
 
   // ── Smooth counter (easeOutCubic) ────────────────
@@ -1498,10 +1582,26 @@
           progress.style.width = Math.round(((i + 1) / total) * 100) + '%';
           var div = document.createElement('div');
           div.className = 'check-item flex items-center gap-3 text-xs py-1';
-          div.innerHTML =
-            '<span class="w-5 h-5 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-white" style="background:' + (check.pass ? '#22c55e' : '#ef4444') + ';font-size:10px;">' + (check.pass ? '✓' : '✗') + '</span>' +
-            '<span class="flex-1 text-gray-300">' + check.name + '</span>' +
-            '<span class="font-semibold" style="color:' + (check.pass ? '#4ade80' : '#f87171') + ';">' + (check.pass ? 'Conforme' : 'Non conforme') + '</span>';
+
+          // Safe DOM construction — no innerHTML with dynamic data
+          var icon = document.createElement('span');
+          icon.className = 'w-5 h-5 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-white';
+          icon.style.cssText = 'background:' + (check.pass ? '#22c55e' : '#ef4444') + ';font-size:10px;';
+          icon.textContent = check.pass ? '✓' : '✗';
+
+          var name = document.createElement('span');
+          name.className = 'flex-1 text-gray-300';
+          name.textContent = check.name;
+
+          var status = document.createElement('span');
+          status.className = 'font-semibold';
+          status.style.color = check.pass ? '#4ade80' : '#f87171';
+          status.textContent = check.pass ? 'Conforme' : 'Non conforme';
+
+          div.appendChild(icon);
+          div.appendChild(name);
+          div.appendChild(status);
+
           checksEl.appendChild(div);
           requestAnimationFrame(function() { div.classList.add('visible'); });
           if (i === 0) animateCount(73, total * 300, function(v) { scoreEl.textContent = v; });
