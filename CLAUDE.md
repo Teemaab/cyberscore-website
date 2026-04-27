@@ -139,3 +139,43 @@ R: Via le formulaire sur cette page ou à
 - No Laziness : causes racines, pas de correctifs temporaires
 - Impact : toucher uniquement ce qui est nécessaire,
   éviter d'introduire des bugs
+
+## Progress
+
+### Implémenté et testé
+
+| Section | Statut | Notes |
+|---|---|---|
+| Navbar | ✅ | Logo réel, liens ancres, menu mobile Alpine.js, sticky |
+| Hero | ✅ | Titre, CTA, browser frame + screenshot `cyberscore5.PNG` |
+| Problème | ✅ | 4 cards (Visibilité, Conformité, Humain, Temps) |
+| Démo interactive | ✅ | 7 checks séquentiels 300ms, compteur 0→73, scores technique/usage, reset, screenshots `cyberscore6.PNG` + `cyberscore1.PNG`, GA event `lancer_scan` |
+| Solution | ✅ | 3 étapes numérotées |
+| Fonctionnalités | ✅ | Bug couleurs corrigé (Tailwind config order + CSS fallbacks + inline style), screenshot `cyberscore4.PNG` |
+| Témoignages | ✅ | 3 cards placeholder crédibles |
+| Tarifs | ✅ | 3 plans Starter/PME/Pro en FCFA |
+| Contact | ✅ | Formspree AJAX fetch(), confirmation/erreur visuels, Alpine.js |
+| Footer | ✅ | Logo réel, liens, copyright |
+| Chatbot FAQ | ✅ | 6 Q&As, chips cliquables, animation ouverture/fermeture, mobile |
+| SEO & Open Graph | ✅ | title, description, og:title, og:description, og:image, og:url |
+| Google Analytics | ✅ | gtag.js G-C11WXW9KLR, events `lancer_scan` + `demander_diagnostic` |
+| Logo réel | ✅ | `logo.png` dans navbar, footer, chatbot |
+| Scroll animations | ✅ | IntersectionObserver fade-in sur toutes les sections |
+| Mobile responsive | ✅ | Mobile-first, menu hamburger, grilles adaptatives |
+
+### Bugs corrigés
+
+| Bug | Cause racine | Correctif |
+|---|---|---|
+| Fonctionnalités section blanche | `tailwind.config` défini AVANT le CDN script — le CDN écrasait la config | CDN d'abord, puis config ; + CSS fallbacks + inline `style=` |
+| Dashboard n'animait pas au 2ème scan | `animation: forwards` sur règle CSS statique → pas de replay | Class `.dashboard-show` + `void el.offsetWidth` (force reflow) avant re-ajout |
+
+### Reste à faire (post-déploiement)
+
+- [ ] Remplacer `og:image` placeholder par URL image réelle après déploiement
+- [ ] Mettre le vrai domaine dans `og:url` et balises meta
+- [ ] Tester formulaire Formspree en production (vrai envoi email)
+- [ ] Remplacer témoignages placeholder par vrais clients
+- [ ] Optimiser images (convertir PNG → WebP, compresser)
+- [ ] Ajouter pages légales (CGU, Politique de confidentialité)
+- [ ] Vérifier performance Lighthouse (score cible > 90)
