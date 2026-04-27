@@ -71,6 +71,44 @@ R: Oui. Toutes les communications sont chiffrées.
 Q: Ça fonctionne sur quel système ?
 R: Windows 10 et Windows 11, domaine AD ou workgroup.
 
+Q: Nos données sont-elles en sécurité si elles passent sur votre serveur ?
+R: Oui. Toutes les communications sont chiffrées (HTTPS). 
+   Vos données ne sont jamais partagées avec d'autres clients. Si vous avez des contraintes réglementaires fortes, nous proposons l'hébergement sur votre propre serveur — les données ne quittent jamais votre réseau.
+
+Q: Faut-il intervenir sur chaque PC ?"**
+R: Pour les entreprises avec Active Directory (domaine Windows),
+   un déploiement automatisé via GPO est possible — les employés n'ont rien à faire. 
+   Pour les petites structures, l'installation prend 2 minutes par PC.
+
+Q: Est-ce que l'agent peut ralentir les PC ?
+R: Non. L'agent s'exécute ponctuellement (à la demande), 
+   fait ses vérifications en 2-3 minutes, puis se ferme. Il ne tourne pas en arrière-plan en permanence.
+
+Q: Que se passe-t-il si un PC n'est pas connecté à internet ?
+R: Si le client est en mode hébergement local (Option D), 
+   aucun internet n'est nécessaire — l'agent communique sur le réseau interne. En mode hébergement FADI, une connexion internet est nécessaire au moment du scan.
+
+Q: L'IA lit-elle le contenu de nos fichiers ?
+R: Non. L'IA reçoit uniquement les résultats des vérifications techniques 
+   (ex : "BitLocker : non actif", "Antivirus : à jour") et génère des recommandations basées sur ces métadonnées. Aucun fichier, email ou document n'est lu ou transmis.
+
+Q: Peut-on avoir plusieurs responsables IT avec accès au dashboard ?
+R: Oui. 
+   Vous pouvez créer autant d'utilisateurs que nécessaire pour votre entreprise, avec deux niveaux d'accès : administrateur (toutes les actions) et lecteur (consultation uniquement).
+
+Q: Comment se passe la mise à jour de l'application ?
+R: En mode hébergement FADI : 
+   vous ne faites rien, FADI met à jour le serveur central. 
+   En mode hébergement client : FADI vous fournit les nouvelles versions et vous accompagne lors des mises à jour (inclus dans la licence annuelle).
+
+Q: Que couvre le score de 0 à 100 exactement ?"
+R: 60% du score vient de la configuration technique du PC (mises à jour, antivirus, pare-feu, chiffrement, etc.). 
+   40% vient du comportement de l'utilisateur (réponses au questionnaire : gestion des mots de passe, vigilance phishing, habitudes de redémarrage...). Un score de 80+ signifie que le poste est bien protégé. En dessous de 60, une action corrective est urgente.
+
+Q: Peut-on voir l'évolution dans le temps ?
+R: Oui. 
+   Pour chaque machine, le tableau de bord affiche l'historique des 10 derniers scans avec les scores correspondants. Vous pouvez ainsi mesurer les progrès après correction des problèmes détectés.
+
 Q: Comment vous contacter ?
 R: Via le formulaire sur cette page ou à
    teemaabdoulaye@gmail.com
