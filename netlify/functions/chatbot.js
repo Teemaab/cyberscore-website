@@ -1,3 +1,6 @@
+// Uses Node's built-in https — no fetch, no AbortSignal, works on Node 14/16/18+
+const https = require('https');
+
 const SYSTEM_PROMPT = `Tu es l'assistant officiel de CyberScore.
 CyberScore est un outil de diagnostic de sécurité informatique pour les PMEs d'Afrique francophone.
 
@@ -24,72 +27,96 @@ Règles :
 - Si hors sujet : rediriger vers le formulaire de contact
 - Ton chaleureux et professionnel`;
 
+function callDeepSeek(apiKey, userMessage) {
+  return new Promise(function (resolve, reject) {
+    var payload = JSON.stringify({
+      model: 'deepseek-chat',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: userMessage },
+      ],
+      max_tokens: 150,
+      temperature: 0.7,
+    });
+
+    var options = {
+      hostname: 'api.deepseek.com',
+      path: '/chat/completions',
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + apiKey,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+      },
+    };
+
+    var req = https.request(options, function (res) {
+      var raw = '';
+      res.on('data', function (chunk) { raw += chunk; });
+      res.on('end', function () {
+        try {
+          var data = JSON.parse(raw);
+          var reply = data && data.choices && data.choices[0] &&
+                      data.choices[0].message && data.choices[0].message.content;
+          if (reply) resolve(reply);
+          else reject(new Error('empty reply: ' + raw));
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+
+    // 10-second timeout
+    req.setTimeout(10000, function () {
+      req.destroy(new Error('timeout'));
+    });
+
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
 exports.handler = async function (event) {
-  // Only accept POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  // API key must come from Netlify environment variables — never from code
-  const apiKey = process.env.DEEPSEEK_API_KEY;
+  var apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
-    return { statusCode: 503, body: JSON.stringify({ error: 'Service indisponible' }) };
+    // Key not set in Netlify — tell the frontend so it can use static fallback
+    return {
+      statusCode: 503,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'no_key' }),
+    };
   }
 
-  // Parse body safely
-  let message;
+  var message;
   try {
-    const body = JSON.parse(event.body || '{}');
+    var body = JSON.parse(event.body || '{}');
     message = (body.message || '').trim();
   } catch (_) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Requête invalide' }) };
   }
 
-  if (!message) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Message vide' }) };
-  }
-  if (message.length > 500) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Message trop long' }) };
-  }
+  if (!message)         return { statusCode: 400, body: JSON.stringify({ error: 'Message vide' }) };
+  if (message.length > 500) return { statusCode: 400, body: JSON.stringify({ error: 'Message trop long' }) };
 
   try {
-    const response = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'deepseek-chat',
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          { role: 'user', content: message },
-        ],
-        max_tokens: 150,
-        temperature: 0.7,
-      }),
-      signal: AbortSignal.timeout(10000),
-    });
-
-    if (!response.ok) throw new Error(`DeepSeek ${response.status}`);
-
-    const data = await response.json();
-    const reply = data?.choices?.[0]?.message?.content;
-    if (!reply) throw new Error('empty reply');
-
+    var reply = await callDeepSeek(apiKey, message);
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ reply }),
+      body: JSON.stringify({ reply: reply }),
     };
-
-  } catch (_) {
+  } catch (err) {
+    // Log for Netlify function logs (visible in dashboard)
+    console.error('DeepSeek error:', err.message);
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        reply: 'Je ne suis pas disponible pour le moment. Contactez-nous à teemaabdoulaye@gmail.com',
-      }),
+      body: JSON.stringify({ error: 'api_error' }),
     };
   }
 };

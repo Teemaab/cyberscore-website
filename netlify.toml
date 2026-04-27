@@ -2,10 +2,11 @@
   publish = "."
   functions = "netlify/functions"
 
-# Redirect /api/chatbot → the Netlify function transparently
-# The frontend calls /api/chatbot — this makes it work without changing index.html
+[context.production.environment]
+  NODE_VERSION = "18"
+
 [[redirects]]
-  from = "/api/chatbot"
-  to   = "/.netlify/functions/chatbot"
+  from   = "/api/chatbot"
+  to     = "/.netlify/functions/chatbot"
   status = 200
   force  = true

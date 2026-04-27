@@ -1653,7 +1653,7 @@
   // ── Chatbot IA ───────────────────────────────────
   var chatbot = {
     isOpen:  false,
-    busy:    false,  // prevents concurrent requests
+    busy:    false,
 
     chips: [
       "C'est quoi CyberScore ?",
@@ -1661,6 +1661,41 @@
       "Mes données sont sécurisées ?",
       "Comment nous contacter ?"
     ],
+
+    // Static fallback used when DeepSeek is unreachable
+    faq: [
+      { k: ['quoi','qu\'est','c\'est','présente','cyberscore'],
+        a: "CyberScore vérifie chaque ordinateur Windows en 3 minutes et lui donne un score de 0 à 100 avec les problèmes à corriger — en français. Sans informaticien dédié." },
+      { k: ['coût','coute','coûte','prix','tarif','fcfa','combien','abonnement'],
+        a: "À partir de 25 000 FCFA/mois pour 10 ordinateurs (soit 2 500 FCFA/ordinateur). Plan PME : 60 000 FCFA/mois. Paiement après validation du diagnostic. Pas d'engagement." },
+      { k: ['données','sécuris','confidentiel','partag','cloud','local'],
+        a: "Oui. Communications chiffrées HTTPS. Vos données ne sont jamais partagées. Mode 100% local disponible pour les institutions sensibles — aucune donnée ne quitte votre réseau." },
+      { k: ['contact','email','joindre','appel','réponse'],
+        a: "Via le formulaire sur cette page ou à teemaabdoulaye@gmail.com — réponse sous 24h ouvrées." },
+      { k: ['informaticien','expert','compétence','technique','formation','difficile'],
+        a: "Non. L'employé double-clique sur le fichier, voit son score en 3 minutes. Aucune compétence technique requise." },
+      { k: ['antivirus','protection','protège','firewall','pare-feu','attaque'],
+        a: "CyberScore N'EST PAS un antivirus. C'est un outil de diagnostic qui mesure votre niveau de sécurité. Il identifie les problèmes — il ne les bloque pas." },
+      { k: ['windows','système','compatible','version','os'],
+        a: "Windows 10 et Windows 11, en domaine Active Directory ou en workgroup." },
+      { k: ['score','100','note','mesure','calcul','critères'],
+        a: "60% du score vient de la configuration technique (antivirus, mises à jour, pare-feu…). 40% du comportement de l'utilisateur. Score ≥ 80 : bien protégé. Score < 60 : action urgente." },
+      { k: ['pc','ordinateur','lent','ralentit','performance'],
+        a: "Non. L'agent s'exécute ponctuellement en 2–3 minutes puis se ferme. Il ne tourne pas en arrière-plan en permanence." },
+      { k: ['internet','hors ligne','offline','réseau','interne'],
+        a: "En mode local, aucun internet n'est nécessaire — l'agent communique sur votre réseau interne. En mode hébergement cloud, une connexion est nécessaire au moment du scan." },
+    ],
+
+    staticFallback: function(text) {
+      var lower = text.toLowerCase();
+      for (var i = 0; i < this.faq.length; i++) {
+        var entry = this.faq[i];
+        for (var j = 0; j < entry.k.length; j++) {
+          if (lower.indexOf(entry.k[j]) !== -1) return entry.a;
+        }
+      }
+      return "Pour toute question, contactez-nous à teemaabdoulaye@gmail.com ou via le formulaire sur cette page — réponse sous 24h.";
+    },
 
     toggle: function() {
       this.isOpen = !this.isOpen;
@@ -1719,7 +1754,6 @@
       text = String(text).trim();
       if (!text || this.busy) return;
 
-      // Client-side length guard (server enforces the same limit)
       if (text.length > 500) {
         this.addMsg('Votre message est trop long (max 500 caractères).', 'bot');
         return;
@@ -1730,6 +1764,9 @@
       this.addMsg(text, 'user');
       this.showTyping();
 
+      var usedFallback = false;
+      var self = this;
+
       try {
         var res = await fetch('/api/chatbot', {
           method: 'POST',
@@ -1738,19 +1775,28 @@
         });
 
         var data = await res.json();
-        this.hideTyping();
+        self.hideTyping();
 
-        var reply = (data && data.reply)
-          ? data.reply
-          : "Je n'ai pas pu répondre. Contactez-nous à teemaabdoulaye@gmail.com";
-        this.addMsg(reply, 'bot');
+        // If the server returned an error flag, use the static fallback
+        if (data && data.reply) {
+          self.addMsg(data.reply, 'bot');
+        } else {
+          usedFallback = true;
+          self.addMsg(self.staticFallback(text), 'bot');
+        }
 
       } catch (err) {
-        this.hideTyping();
-        this.addMsg(
-          'Service momentanément indisponible. Écrivez-nous à teemaabdoulaye@gmail.com',
-          'bot'
-        );
+        // Network failure (offline, function not deployed, etc.) — use static FAQ
+        self.hideTyping();
+        usedFallback = true;
+        self.addMsg(self.staticFallback(text), 'bot');
+      }
+
+      // If we fell back, add a soft note so the user knows
+      if (usedFallback) {
+        setTimeout(function() {
+          self.addMsg('💡 Réponse automatique — pour une question précise, utilisez le formulaire de contact.', 'bot');
+        }, 400);
       }
 
       this.busy = false;
