@@ -1407,9 +1407,9 @@
 
 
 <!-- ══════════════════════════════════════════════
-     11. CHATBOT FAQ FLOTTANT
+     11. CHATBOT IA FLOTTANT
 ══════════════════════════════════════════════════ -->
-<button id="chatToggle" onclick="chatbot.toggle()" aria-label="Ouvrir le chat FAQ" aria-expanded="false" aria-controls="chatPanel"
+<button id="chatToggle" onclick="chatbot.toggle()" aria-label="Ouvrir le chat" aria-expanded="false" aria-controls="chatPanel"
   class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-95"
   style="background:#E8620A;">
   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1421,14 +1421,18 @@
 
 <div id="chatPanel"
      class="chat-panel panel-closed fixed bottom-24 right-5 z-50 w-80 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-100"
-     style="height:460px;max-height:calc(100vh - 8rem);max-width:calc(100vw - 1.25rem);">
+     style="height:520px;max-height:calc(100vh - 8rem);max-width:calc(100vw - 1.25rem);">
+
   <!-- Header -->
   <div class="flex items-center justify-between px-4 py-3.5 flex-shrink-0" style="background:#1A3A6B;">
     <div class="flex items-center gap-2.5">
       <img src="logo.png" alt="" class="h-7 w-auto">
       <div>
-        <div class="text-white font-semibold text-sm">CyberScore FAQ</div>
-        <div class="text-white/60 text-xs">Réponses instantanées</div>
+        <div class="text-white font-semibold text-sm">Assistant CyberScore</div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full flex-shrink-0" style="animation:livePulse 2s infinite;"></span>
+          <span class="text-white/60 text-xs">IA · En direct</span>
+        </div>
       </div>
     </div>
     <button onclick="chatbot.toggle()" class="text-white/70 hover:text-white p-1 rounded-lg hover:bg-white/10" aria-label="Fermer">
@@ -1439,17 +1443,37 @@
   </div>
 
   <!-- Messages -->
-  <div id="chatMessages" class="flex-1 overflow-y-auto p-4 flex flex-col gap-2.5">
+  <div id="chatMessages" class="flex-1 overflow-y-auto p-4 flex flex-col gap-2.5" style="overscroll-behavior:contain;">
     <div class="self-start bg-gray-100 text-gray-800 text-sm rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[85%] leading-relaxed">
-      Bonjour 👋 Comment puis-je vous aider ?
+      Bonjour 👋 Je suis l'assistant CyberScore. Posez-moi votre question ou choisissez parmi les suggestions.
     </div>
   </div>
 
-  <!-- Chips -->
-  <div class="flex-shrink-0 border-t border-gray-100 p-3">
-    <p class="text-xs text-gray-400 mb-2 font-medium">Questions fréquentes :</p>
-    <div id="chatChips" class="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto"></div>
+  <!-- Quick chips -->
+  <div class="flex-shrink-0 px-3 pt-2.5 pb-1 border-t border-gray-100">
+    <p class="text-xs text-gray-400 mb-1.5 font-medium">Suggestions :</p>
+    <div id="chatChips" class="flex flex-wrap gap-1.5"></div>
   </div>
+
+  <!-- Text input -->
+  <div class="flex-shrink-0 flex items-center gap-2 px-3 py-2.5">
+    <input id="chatInput"
+           type="text"
+           placeholder="Posez votre question…"
+           maxlength="500"
+           autocomplete="off"
+           class="flex-1 text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:border-brand transition-colors"
+           style="min-width:0;">
+    <button id="chatSend" onclick="chatbot.sendFromInput()"
+            aria-label="Envoyer"
+            class="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
+            style="background:#E8620A;">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+      </svg>
+    </button>
+  </div>
+
 </div>
 
 
@@ -1626,37 +1650,18 @@
     }
   };
 
-  // ── Chatbot ──────────────────────────────────────
+  // ── Chatbot IA ───────────────────────────────────
   var chatbot = {
-    isOpen: false,
-    qa: [
-      { q: "C'est quoi CyberScore ?",
-        a: "CyberScore vérifie chaque ordinateur Windows de votre entreprise en 3 minutes et lui donne un score de 0 à 100 avec les problèmes à corriger, classés par priorité — en français. Sans informaticien dédié." },
-      { q: "Combien ça coûte ?",
-        a: "À partir de 25 000 FCFA/mois pour jusqu'à 10 ordinateurs (soit 2 500 FCFA par ordinateur). Pas d'engagement. Paiement après validation du diagnostic." },
-      { q: "Faut-il un informaticien ?",
-        a: "Non. L'employé double-clique sur le fichier, voit son score en 3 minutes. Aucune compétence technique requise." },
-      { q: "Que couvre le score 0–100 ?",
-        a: "60% vient de la configuration technique du PC (antivirus, pare-feu, chiffrement, mises à jour…). 40% vient du comportement de l'utilisateur (gestion des mots de passe, vigilance phishing…). Score ≥ 80 : bien protégé. Score < 60 : action urgente." },
-      { q: "Mes données sont-elles sécurisées ?",
-        a: "Oui. Toutes les communications sont chiffrées (HTTPS). Vos données ne sont jamais partagées. Pour les institutions sensibles, un mode 100% local est disponible — aucune donnée ne quitte votre réseau." },
-      { q: "L'IA lit-elle nos fichiers ?",
-        a: "Non. L'IA reçoit uniquement les résultats des vérifications (ex : \"BitLocker : non actif\"). Aucun fichier, email ou document n'est lu ou transmis." },
-      { q: "Faut-il toucher chaque PC ?",
-        a: "Pour les entreprises avec Active Directory, un déploiement automatique via GPO est possible — vos employés ne font rien. Pour les petites structures, l'installation prend 2 minutes par PC." },
-      { q: "L'agent ralentit-il les PC ?",
-        a: "Non. L'agent s'exécute ponctuellement, fait ses vérifications en 2–3 minutes, puis se ferme. Il ne tourne pas en arrière-plan en permanence." },
-      { q: "Fonctionne sans internet ?",
-        a: "En mode hébergement local, aucun internet n'est nécessaire — l'agent communique sur votre réseau interne. En mode hébergement FADI, une connexion internet est nécessaire au moment du scan." },
-      { q: "Plusieurs accès au tableau de bord ?",
-        a: "Oui. Vous pouvez créer autant d'utilisateurs que nécessaire, avec deux niveaux : administrateur (toutes les actions) et lecteur (consultation uniquement)." },
-      { q: "Peut-on suivre l'évolution ?",
-        a: "Oui. Le tableau de bord affiche l'historique des 10 derniers scans pour chaque machine. Vous mesurez les progrès après correction des problèmes détectés." },
-      { q: "Quel système d'exploitation ?",
-        a: "Windows 10 et Windows 11, en domaine Active Directory ou en workgroup." },
-      { q: "Comment vous contacter ?",
-        a: "Via le formulaire sur cette page ou directement à teemaabdoulaye@gmail.com — réponse sous 24h ouvrées." },
+    isOpen:  false,
+    busy:    false,  // prevents concurrent requests
+
+    chips: [
+      "C'est quoi CyberScore ?",
+      "Combien ça coûte ?",
+      "Mes données sont sécurisées ?",
+      "Comment nous contacter ?"
     ],
+
     toggle: function() {
       this.isOpen = !this.isOpen;
       var panel  = document.getElementById('chatPanel');
@@ -1666,7 +1671,15 @@
       panel.classList.toggle('panel-closed', !this.isOpen);
       if (toggle) toggle.setAttribute('aria-expanded', String(this.isOpen));
       if (badge)  badge.style.display = 'none';
+      // Focus input when opening for mobile accessibility
+      if (this.isOpen) {
+        setTimeout(function() {
+          var inp = document.getElementById('chatInput');
+          if (inp) inp.focus();
+        }, 320);
+      }
     },
+
     addMsg: function(text, type) {
       var msgs = document.getElementById('chatMessages');
       var div  = document.createElement('div');
@@ -1674,42 +1687,110 @@
         ? 'self-end text-white text-sm rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] leading-relaxed'
         : 'self-start bg-gray-100 text-gray-800 text-sm rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[85%] leading-relaxed';
       if (type === 'user') div.style.background = '#E8620A';
-      div.textContent = text;
+      div.textContent = text;  // textContent — never innerHTML with user input
       msgs.appendChild(div);
       msgs.scrollTop = msgs.scrollHeight;
     },
+
     showTyping: function() {
       var msgs = document.getElementById('chatMessages');
       var div  = document.createElement('div');
       div.id = 'typingInd';
       div.className = 'self-start bg-gray-100 rounded-2xl rounded-tl-sm px-4 py-3';
+      // Static markup — no user data here, innerHTML is safe
       div.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
       msgs.appendChild(div);
       msgs.scrollTop = msgs.scrollHeight;
     },
-    answer: function(q, a) {
-      var self = this;
-      this.addMsg(q, 'user');
-      this.showTyping();
-      setTimeout(function() {
-        var ind = document.getElementById('typingInd');
-        if (ind) ind.remove();
-        self.addMsg(a, 'bot');
-      }, 650);
+
+    hideTyping: function() {
+      var ind = document.getElementById('typingInd');
+      if (ind) ind.remove();
     },
+
+    setInputBusy: function(busy) {
+      var inp  = document.getElementById('chatInput');
+      var send = document.getElementById('chatSend');
+      if (inp)  { inp.disabled = busy; inp.style.opacity = busy ? '0.5' : '1'; }
+      if (send) { send.disabled = busy; send.style.opacity = busy ? '0.5' : '1'; }
+    },
+
+    send: async function(text) {
+      text = String(text).trim();
+      if (!text || this.busy) return;
+
+      // Client-side length guard (server enforces the same limit)
+      if (text.length > 500) {
+        this.addMsg('Votre message est trop long (max 500 caractères).', 'bot');
+        return;
+      }
+
+      this.busy = true;
+      this.setInputBusy(true);
+      this.addMsg(text, 'user');
+      this.showTyping();
+
+      try {
+        var res = await fetch('/api/chatbot', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        var data = await res.json();
+        this.hideTyping();
+
+        var reply = (data && data.reply)
+          ? data.reply
+          : "Je n'ai pas pu répondre. Contactez-nous à teemaabdoulaye@gmail.com";
+        this.addMsg(reply, 'bot');
+
+      } catch (err) {
+        this.hideTyping();
+        this.addMsg(
+          'Service momentanément indisponible. Écrivez-nous à teemaabdoulaye@gmail.com',
+          'bot'
+        );
+      }
+
+      this.busy = false;
+      this.setInputBusy(false);
+    },
+
+    sendFromInput: function() {
+      var inp = document.getElementById('chatInput');
+      if (!inp) return;
+      var text = inp.value.trim();
+      inp.value = '';
+      this.send(text);
+    },
+
     init: function() {
       var self  = this;
       var chips = document.getElementById('chatChips');
       if (!chips) return;
-      this.qa.forEach(function(item) {
+
+      // Render quick-access chips
+      this.chips.forEach(function(q) {
         var btn = document.createElement('button');
         btn.className = 'text-xs bg-white border border-gray-200 text-gray-600 rounded-full px-3 py-1.5 transition-colors duration-150 text-left';
-        btn.textContent = item.q;
-        btn.onmouseenter = function() { btn.style.borderColor='#E8620A'; btn.style.color='#E8620A'; };
-        btn.onmouseleave = function() { btn.style.borderColor=''; btn.style.color=''; };
-        btn.addEventListener('click', function() { self.answer(item.q, item.a); });
+        btn.textContent = q;
+        btn.onmouseenter = function() { btn.style.borderColor = '#E8620A'; btn.style.color = '#E8620A'; };
+        btn.onmouseleave = function() { btn.style.borderColor = ''; btn.style.color = ''; };
+        btn.addEventListener('click', function() { self.send(q); });
         chips.appendChild(btn);
       });
+
+      // Enter key sends message
+      var inp = document.getElementById('chatInput');
+      if (inp) {
+        inp.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            self.sendFromInput();
+          }
+        });
+      }
     }
   };
 </script>

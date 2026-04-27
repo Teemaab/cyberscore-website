@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/chatbot.js": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 15
+    }
+  }
+}
