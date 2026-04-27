@@ -20,10 +20,17 @@
   <!-- Favicon -->
   <link rel="icon" href="logo.png">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Preload hero LCP image -->
+  <link rel="preload" as="image" href="assets/cyberscore5.PNG">
+
+  <!-- Non-blocking font loading -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"></noscript>
+
+  <!-- Google Fonts: Inter (preconnect only — stylesheet loaded non-blocking above) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Tailwind CDN first, then config -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -113,10 +120,27 @@
     .browser-bar { flex:1; margin: 0 .75rem; background: #fff; border-radius: .25rem; padding: .2rem .75rem; font-size: .7rem; color: #9ca3af; border: 1px solid #e5e7eb; }
 
     html { scroll-behavior: smooth; }
+
+    /* ── Hero redesign ── */
+    .hero-cta-primary { background:#E8620A; }
+    .hero-cta-primary:hover { background:#F07A2C; }
+    .hero-cta-secondary { border:2px solid rgba(255,255,255,0.2); }
+    .hero-cta-secondary:hover { border-color:rgba(255,255,255,0.5); }
+    .hero-browser { border-radius:12px; overflow:hidden; border:1px solid rgba(232,98,10,0.28); box-shadow:0 0 0 1px rgba(232,98,10,0.1), 0 0 80px rgba(232,98,10,0.12), 0 32px 64px rgba(0,0,0,0.55); }
+    @keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .live-dot { animation:livePulse 2s infinite; }
+
+    /* ── Skip link (a11y) ── */
+    .skip-link { position:absolute; top:-100px; left:1rem; z-index:9999; background:#E8620A; color:#fff; padding:.5rem 1rem; border-radius:.5rem; font-weight:700; font-size:.875rem; text-decoration:none; transition:top .15s ease; }
+    .skip-link:focus { top:1rem; }
+
+    /* ── Focus visible (keyboard nav) ── */
+    :focus-visible { outline:2px solid #E8620A; outline-offset:3px; border-radius:4px; }
   </style>
 </head>
 
 <body class="antialiased text-gray-900 bg-white">
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <!-- ══════════════════════════════════════════════
      1. NAVBAR
@@ -146,7 +170,8 @@
       </a>
 
       <!-- Hamburger -->
-      <button @click="open=!open" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100" aria-label="Menu">
+      <button @click="open=!open" :aria-expanded="open.toString()" aria-controls="mobile-menu"
+              class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100" aria-label="Menu">
         <svg x-show="!open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -158,7 +183,7 @@
   </div>
 
   <!-- Mobile menu -->
-  <div x-show="open" x-cloak
+  <div id="mobile-menu" x-show="open" x-cloak
        x-transition:enter="transition ease-out duration-200"
        x-transition:enter-start="opacity-0 -translate-y-2"
        x-transition:enter-end="opacity-100 translate-y-0"
@@ -177,90 +202,133 @@
   </div>
 </nav>
 
+<main id="main-content">
 
 <!-- ══════════════════════════════════════════════
      2. HERO
 ══════════════════════════════════════════════════ -->
-<section id="hero" class="pt-16 bg-navy min-h-screen flex items-center relative overflow-hidden"
-         style="background: linear-gradient(135deg, #0A192E 0%, #1A3A6B 60%, #122952 100%);">
-  <!-- Dot pattern -->
-  <div class="absolute inset-0 opacity-[0.04]"
-       style="background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:36px 36px;"></div>
+<section id="hero" class="pt-16 relative overflow-hidden"
+         style="background:#0B1929; min-height:100vh; min-height:100svh; display:flex; align-items:center;">
+
+  <!-- Thin grid lines — technical precision, not dots -->
+  <div class="absolute inset-0 pointer-events-none"
+       style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M 64 0 L 0 0 0 64' fill='none' stroke='rgba(255,255,255,0.035)' stroke-width='1'/%3E%3C/svg%3E&quot;);"></div>
+
+  <!-- Ambient orange glow — right side, behind screenshot -->
+  <div class="absolute inset-0 pointer-events-none"
+       style="background:radial-gradient(ellipse 60% 75% at 78% 52%, rgba(232,98,10,0.09) 0%, transparent 65%);"></div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 w-full">
-    <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+    <div class="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center">
 
       <!-- Left: copy -->
       <div class="text-white">
-        <div class="inline-flex items-center gap-2 bg-white/10 text-white/80 text-sm font-medium px-4 py-2 rounded-full mb-7 border border-white/20">
-          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse flex-shrink-0"></span>
-          Windows 10 &amp; 11 — Sans installation serveur
+
+        <!-- Pill — specific, not generic -->
+        <div class="inline-flex items-center gap-2.5 mb-8"
+             style="background:rgba(232,98,10,0.12); border:1px solid rgba(232,98,10,0.28); border-radius:100px; padding:5px 14px 5px 8px;">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full flex-shrink-0" style="background:#E8620A;">
+            <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+            </svg>
+          </span>
+          <span class="text-sm font-semibold" style="color:rgba(255,255,255,0.8);">Windows 10 &amp; 11 · Sans installation serveur</span>
         </div>
 
-        <h1 class="text-4xl md:text-5xl xl:text-6xl font-black leading-tight mb-6">
-          La cybersécurité de vos postes,
-          <span style="color:#E8620A;">enfin accessible.</span>
+        <!-- Heading — tight tracking, orange underline accent -->
+        <h1 class="font-black mb-6"
+            style="font-size:clamp(2.1rem,4vw,3.4rem); letter-spacing:-0.025em; line-height:1.08;">
+          La cybersécurité<br>
+          de vos postes,<br>
+          <span class="relative inline-block" style="color:#E8620A;">
+            enfin accessible.
+            <span class="absolute" style="bottom:-5px;left:0;width:58%;height:2px;background:linear-gradient(to right,#E8620A,transparent);border-radius:1px;"></span>
+          </span>
         </h1>
 
-        <p class="text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
+        <p class="mb-8" style="font-size:1.0625rem; color:rgba(255,255,255,0.6); line-height:1.8; max-width:430px;">
           CyberScore analyse vos machines Windows en&nbsp;3&nbsp;minutes, vous donne un score clair et des
           recommandations concrètes en&nbsp;français. Sans expert. Sans infrastructure.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-3 mb-10">
           <a href="#demo"
-             class="inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-light text-white font-bold px-8 py-4 rounded-xl text-base transition-colors duration-200">
+             class="hero-cta-primary inline-flex items-center gap-2 text-white font-bold rounded-xl transition-colors duration-200"
+             style="padding:14px 26px; font-size:0.9375rem; text-decoration:none;">
             Voir la démo interactive
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
             </svg>
           </a>
           <a href="#contact"
-             class="inline-flex items-center justify-center border-2 border-white/30 hover:border-white text-white font-bold px-8 py-4 rounded-xl text-base transition-colors duration-200">
+             class="hero-cta-secondary inline-flex items-center justify-center text-white font-bold rounded-xl transition-colors duration-200"
+             style="padding:14px 26px; font-size:0.9375rem; text-decoration:none;">
             Diagnostic gratuit
           </a>
         </div>
 
-        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
-          <span class="flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-            </svg>Sans infrastructure requise
-          </span>
-          <span class="flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-            </svg>Rapport en 3 minutes
-          </span>
-          <span class="flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-            </svg>100 % en français
-          </span>
+        <!-- Stats strip — numbers, not checkmarks -->
+        <div class="flex flex-wrap items-stretch gap-6">
+          <div>
+            <div class="text-2xl font-black text-white leading-none">3 min</div>
+            <div class="text-xs mt-1" style="color:rgba(255,255,255,0.4);">durée du scan</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.1); align-self:stretch;"></div>
+          <div>
+            <div class="text-2xl font-black text-white leading-none">0</div>
+            <div class="text-xs mt-1" style="color:rgba(255,255,255,0.4);">expert requis</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.1); align-self:stretch;"></div>
+          <div>
+            <div class="text-2xl font-black text-white leading-none">100%</div>
+            <div class="text-xs mt-1" style="color:rgba(255,255,255,0.4);">en français</div>
+          </div>
         </div>
       </div>
 
-      <!-- Right: real screenshot — rapport vu par l'employé -->
+      <!-- Right: screenshot + metric cards -->
       <div class="flex justify-center lg:justify-end">
-        <div class="w-full max-w-md relative">
-          <!-- Browser frame -->
-          <div class="browser-frame">
-            <div class="browser-chrome">
-              <span class="browser-dot bg-red-400"></span>
-              <span class="browser-dot bg-yellow-400"></span>
-              <span class="browser-dot bg-green-400"></span>
-              <div class="browser-bar">cyberscore.africa/rapport</div>
+        <div class="w-full max-w-[480px]">
+
+          <!-- Browser — dark chrome matching security tool aesthetic + orange glow -->
+          <div class="hero-browser">
+            <div style="background:#1c1f23; padding:9px 14px; display:flex; align-items:center; gap:7px; border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span style="width:11px;height:11px;border-radius:50%;background:#ff5f56;flex-shrink:0;display:block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#ffbd2e;flex-shrink:0;display:block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#27c93f;flex-shrink:0;display:block;"></span>
+              <div style="flex:1;margin:0 10px;background:rgba(255,255,255,0.06);border-radius:4px;padding:3px 10px;font-size:11px;color:rgba(255,255,255,0.3);display:flex;align-items:center;gap:5px;">
+                <svg style="width:9px;height:9px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                cyberscore.africa/rapport
+              </div>
+              <!-- Live indicator — signals this is a monitoring tool, not marketing fluff -->
+              <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:rgba(74,222,128,0.85);font-weight:700;letter-spacing:0.08em;" aria-hidden="true">
+                <span class="live-dot" style="width:6px;height:6px;background:#4ade80;border-radius:50%;flex-shrink:0;display:block;"></span>
+                LIVE
+              </div>
             </div>
             <img src="assets/cyberscore5.PNG"
-                 alt="CyberScore — résultats employé : score 79/100"
-                 class="w-full block">
+                 alt="CyberScore — résultats employé affichant un score de 79/100, technique 65 et comportement 100, avec 4 points à corriger"
+                 class="w-full block"
+                 width="960" height="640">
           </div>
-          <!-- Floating badge -->
-          <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl px-4 py-3 border border-gray-100">
-            <div class="text-xs text-gray-400 font-medium mb-0.5">Dernier scan</div>
-            <div class="text-2xl font-black" style="color:#E8620A;">79<span class="text-gray-300 text-base font-normal">/100</span></div>
-            <div class="text-xs text-gray-500">Analysé en 2 min 47 s</div>
+
+          <!-- Metric cards — data-forward, replaces generic floating badge -->
+          <div class="grid grid-cols-2 gap-2.5 mt-3">
+            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;">
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:5px;">Score global</div>
+              <div style="font-size:1.5rem;font-weight:900;color:#E8620A;line-height:1;">79<span style="font-size:0.8rem;color:rgba(255,255,255,0.25);font-weight:400;">/100</span></div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px;">analysé en 2 min 47 s</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;">
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:5px;">Points à corriger</div>
+              <div style="font-size:1.5rem;font-weight:900;color:#f87171;line-height:1;">4</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px;">priorisés par IA en français</div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -442,8 +510,8 @@
               <div class="browser-bar">cyberscore.africa/dashboard</div>
             </div>
             <img src="assets/cyberscore6.PNG"
-                 alt="Tableau de bord DSI CyberScore — vue flotte"
-                 class="w-full block">
+                 alt="Tableau de bord DSI CyberScore — vue flotte, 1 poste, score 59.2/100"
+                 class="w-full block" loading="lazy" width="1280" height="720">
           </div>
           <p class="text-sm text-gray-500 text-center mt-3 font-medium">Vue parc — score moyen, postes à risque</p>
         </div>
@@ -458,8 +526,8 @@
               <div class="browser-bar">cyberscore.africa/machines/DESKTOP-O9SMKB2</div>
             </div>
             <img src="assets/cyberscore1.PNG"
-                 alt="Détail machine CyberScore — scores détaillés"
-                 class="w-full block">
+                 alt="Détail machine CyberScore — score 59.22, technique 65.0, usage 50.56"
+                 class="w-full block" loading="lazy" width="1280" height="720">
           </div>
           <p class="text-sm text-gray-500 text-center mt-3 font-medium">Détail machine — score global, technique, usage</p>
         </div>
@@ -573,8 +641,8 @@
             <div class="browser-bar">cyberscore.africa/machines/checks</div>
           </div>
           <img src="assets/cyberscore4.PNG"
-               alt="Checks techniques CyberScore — tableau complet"
-               class="w-full block">
+               alt="Checks techniques CyberScore — Firewall conforme, Antivirus conforme, Verrouillage à corriger"
+               class="w-full block" loading="lazy" width="1280" height="720">
         </div>
         <p class="text-white/40 text-sm text-center mt-3">Tableau des checks techniques réels — statut, sévérité, risque, impact</p>
       </div>
@@ -801,25 +869,25 @@
           </div>
 
           <!-- Form -->
-          <form x-show="!success" @submit.prevent="submit" class="space-y-4">
+          <form x-show="!success" @submit.prevent="submit" class="space-y-4" novalidate>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nom complet <span class="text-red-400">*</span></label>
-              <input type="text" name="name" required placeholder="Votre nom et prénom"
+              <label for="contact-name" class="block text-sm font-semibold text-gray-700 mb-1.5">Nom complet <span class="text-red-400" aria-label="requis">*</span></label>
+              <input id="contact-name" type="text" name="name" required placeholder="Votre nom et prénom" autocomplete="name"
                 class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email professionnel <span class="text-red-400">*</span></label>
-              <input type="email" name="email" required placeholder="vous@entreprise.com"
+              <label for="contact-email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email professionnel <span class="text-red-400" aria-label="requis">*</span></label>
+              <input id="contact-email" type="email" name="email" required placeholder="vous@entreprise.com" autocomplete="email"
                 class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone <span class="text-gray-400 font-normal">(optionnel)</span></label>
-              <input type="tel" name="phone" placeholder="+221 77 000 00 00"
+              <label for="contact-phone" class="block text-sm font-semibold text-gray-700 mb-1.5">Téléphone <span class="text-gray-400 font-normal">(optionnel)</span></label>
+              <input id="contact-phone" type="tel" name="phone" placeholder="+221 77 000 00 00" autocomplete="tel"
                 class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Message <span class="text-red-400">*</span></label>
-              <textarea name="message" rows="4" required placeholder="Décrivez votre besoin ou posez votre question…"
+              <label for="contact-message" class="block text-sm font-semibold text-gray-700 mb-1.5">Message <span class="text-red-400" aria-label="requis">*</span></label>
+              <textarea id="contact-message" name="message" rows="4" required placeholder="Décrivez votre besoin ou posez votre question…"
                 class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors resize-none"></textarea>
             </div>
             <button type="submit" :disabled="loading"
@@ -839,6 +907,8 @@
 </section>
 
 
+</main>
+
 <!-- ══════════════════════════════════════════════
      10. FOOTER
 ══════════════════════════════════════════════════ -->
@@ -846,7 +916,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-3 gap-8 mb-8">
       <div>
-        <img src="logo.png" alt="CyberScore" class="h-12 w-auto mb-3">
+        <img src="logo.png" alt="CyberScore" class="h-12 w-auto mb-3" loading="lazy" width="200" height="48">
         <p class="text-sm leading-relaxed">Cyberhygiène accessible pour les entreprises et administrations d'Afrique francophone.</p>
         <p class="text-xs mt-2 italic" style="color:rgba(255,255,255,0.3);">Mesurez. Comprenez. Protégez.</p>
       </div>
@@ -879,7 +949,7 @@
 <!-- ══════════════════════════════════════════════
      11. CHATBOT FAQ FLOTTANT
 ══════════════════════════════════════════════════ -->
-<button id="chatToggle" onclick="chatbot.toggle()" aria-label="Ouvrir le chat FAQ"
+<button id="chatToggle" onclick="chatbot.toggle()" aria-label="Ouvrir le chat FAQ" aria-expanded="false" aria-controls="chatPanel"
   class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-95"
   style="background:#E8620A;">
   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1061,11 +1131,13 @@
     ],
     toggle: function() {
       this.isOpen = !this.isOpen;
-      var panel = document.getElementById('chatPanel');
-      var badge = document.getElementById('chatBadge');
+      var panel  = document.getElementById('chatPanel');
+      var badge  = document.getElementById('chatBadge');
+      var toggle = document.getElementById('chatToggle');
       panel.classList.toggle('panel-open',   this.isOpen);
       panel.classList.toggle('panel-closed', !this.isOpen);
-      if (badge) badge.style.display = 'none';
+      if (toggle) toggle.setAttribute('aria-expanded', String(this.isOpen));
+      if (badge)  badge.style.display = 'none';
     },
     addMsg: function(text, type) {
       var msgs = document.getElementById('chatMessages');
