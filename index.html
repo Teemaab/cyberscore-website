@@ -49,7 +49,7 @@
         extend: {
           colors: {
             navy:  { DEFAULT: '#1A3A6B', dark: '#122952' },
-            brand: { DEFAULT: '#E8620A', light: '#F07A2C' }
+            brand: { DEFAULT: '#D97706', light: '#F59E0B' }
           },
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
         }
@@ -75,12 +75,12 @@
     .bg-navy-dark     { background-color: #122952; }
     .text-navy        { color: #1A3A6B; }
     .border-navy      { border-color: #1A3A6B; }
-    .bg-brand         { background-color: #E8620A; }
-    .bg-brand-light   { background-color: #F07A2C; }
-    .text-brand       { color: #E8620A; }
-    .border-brand     { border-color: #E8620A; }
-    .hover\:bg-brand:hover       { background-color: #E8620A; }
-    .hover\:bg-brand-light:hover { background-color: #F07A2C; }
+    .bg-brand         { background-color: #D97706; }
+    .bg-brand-light   { background-color: #F59E0B; }
+    .text-brand       { color: #D97706; }
+    .border-brand     { border-color: #D97706; }
+    .hover\:bg-brand:hover       { background-color: #D97706; }
+    .hover\:bg-brand-light:hover { background-color: #F59E0B; }
     .hover\:bg-navy:hover        { background-color: #1A3A6B; }
     .hover\:text-white:hover     { color: #fff; }
     .hover\:border-white:hover   { border-color: #fff; }
@@ -120,7 +120,7 @@
     @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
     /* ── Pricing featured shadow ── */
-    .pricing-featured { box-shadow: 0 0 0 2px #E8620A, 0 20px 40px -8px rgba(232,98,10,.25); }
+    .pricing-featured { box-shadow: 0 0 0 2px #D97706, 0 20px 40px -8px rgba(217,119,6,.25); }
 
     /* ── Browser chrome mockup ── */
     .browser-frame { border-radius: .75rem; overflow: hidden; box-shadow: 0 25px 60px -10px rgba(0,0,0,.35); }
@@ -131,20 +131,20 @@
     html { scroll-behavior: smooth; }
 
     /* ── Hero redesign ── */
-    .hero-cta-primary { background:#E8620A; }
-    .hero-cta-primary:hover { background:#F07A2C; }
+    .hero-cta-primary { background:#D97706; }
+    .hero-cta-primary:hover { background:#F59E0B; }
     .hero-cta-secondary { border:2px solid rgba(255,255,255,0.2); }
     .hero-cta-secondary:hover { border-color:rgba(255,255,255,0.5); }
-    .hero-browser { border-radius:12px; overflow:hidden; border:1px solid rgba(232,98,10,0.28); box-shadow:0 0 0 1px rgba(232,98,10,0.1), 0 0 80px rgba(232,98,10,0.12), 0 32px 64px rgba(0,0,0,0.55); }
+    .hero-browser { border-radius:12px; overflow:hidden; border:1px solid rgba(217,119,6,0.28); box-shadow:0 0 0 1px rgba(217,119,6,0.1), 0 0 80px rgba(217,119,6,0.12), 0 32px 64px rgba(0,0,0,0.55); }
     @keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:.35} }
     .live-dot { animation:livePulse 2s infinite; }
 
     /* ── Skip link (a11y) ── */
-    .skip-link { position:absolute; top:-100px; left:1rem; z-index:9999; background:#E8620A; color:#fff; padding:.5rem 1rem; border-radius:.5rem; font-weight:700; font-size:.875rem; text-decoration:none; transition:top .15s ease; }
+    .skip-link { position:absolute; top:-100px; left:1rem; z-index:9999; background:#D97706; color:#fff; padding:.5rem 1rem; border-radius:.5rem; font-weight:700; font-size:.875rem; text-decoration:none; transition:top .15s ease; }
     .skip-link:focus { top:1rem; }
 
     /* ── Focus visible (keyboard nav) ── */
-    :focus-visible { outline:2px solid #E8620A; outline-offset:3px; border-radius:4px; }
+    :focus-visible { outline:2px solid #D97706; outline-offset:3px; border-radius:4px; }
   </style>
 
   <!-- Structured data: Organization -->
@@ -307,13 +307,13 @@
   </div>
 </nav>
 
-<!-- Mobile sticky CTA — CRO fix: zero persistent CTA on mobile after hero scrolls off -->
+<!-- Mobile sticky CTA — Soft glassmorphism style -->
 <div id="mobileCta"
      class="md:hidden fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 translate-y-full"
-     style="background:#0A0F1E; border-top:1px solid rgba(255,255,255,0.1); padding:12px 16px 16px;">
+     style="background:rgba(255,255,255,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-top:1px solid rgba(0,0,0,0.06); padding:12px 16px 16px; box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
   <a href="#contact"
      class="flex items-center justify-center gap-2 w-full text-white font-bold rounded-xl text-sm"
-     style="background:#E8620A; padding:14px 20px;"
+     style="background:#D97706; padding:14px 20px;"
      onclick="gaTrack('mobile_sticky_cta')">
     Diagnostic gratuit — Réponse sous 24h
     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -336,7 +336,7 @@
 
   <!-- Ambient orange glow — right side, behind screenshot -->
   <div class="absolute inset-0 pointer-events-none"
-       style="background:radial-gradient(ellipse 60% 75% at 78% 52%, rgba(232,98,10,0.09) 0%, transparent 65%);"></div>
+       style="background:radial-gradient(ellipse 60% 75% at 78% 52%, rgba(217,119,6,0.09) 0%, transparent 65%);"></div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 w-full">
     <div class="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center">
@@ -346,8 +346,8 @@
 
         <!-- Pill — specific, not generic -->
         <div class="inline-flex items-center gap-2.5 mb-8"
-             style="background:rgba(232,98,10,0.12); border:1px solid rgba(232,98,10,0.28); border-radius:100px; padding:5px 14px 5px 8px;">
-          <span class="flex items-center justify-center w-5 h-5 rounded-full flex-shrink-0" style="background:#E8620A;">
+             style="background:rgba(217,119,6,0.12); border:1px solid rgba(217,119,6,0.28); border-radius:100px; padding:5px 14px 5px 8px;">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full flex-shrink-0" style="background:#D97706;">
             <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
             </svg>
@@ -360,9 +360,9 @@
             style="font-size:clamp(2.1rem,4vw,3.4rem); letter-spacing:-0.025em; line-height:1.08;">
           Vos ordinateurs sont-ils<br>
           en danger en ce moment&nbsp;?<br>
-          <span class="relative inline-block" style="color:#E8620A;">
+          <span class="relative inline-block" style="color:#D97706;">
             Réponse en 3&nbsp;minutes.
-            <span class="absolute" style="bottom:-5px;left:0;width:72%;height:2px;background:linear-gradient(to right,#E8620A,transparent);border-radius:1px;"></span>
+            <span class="absolute" style="bottom:-5px;left:0;width:72%;height:2px;background:linear-gradient(to right,#D97706,transparent);border-radius:1px;"></span>
           </span>
         </h1>
 
@@ -446,7 +446,7 @@
           <div class="grid grid-cols-2 gap-2.5 mt-3">
             <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;">
               <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:5px;">Score global</div>
-              <div style="font-size:1.5rem;font-weight:900;color:#E8620A;line-height:1;">79<span style="font-size:0.8rem;color:rgba(255,255,255,0.25);font-weight:400;">/100</span></div>
+              <div style="font-size:1.5rem;font-weight:900;color:#D97706;line-height:1;">79<span style="font-size:0.8rem;color:rgba(255,255,255,0.25);font-weight:400;">/100</span></div>
               <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px;">analysé en 2 min 47 s</div>
             </div>
             <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;">
@@ -465,127 +465,28 @@
 
 
 <!-- ══════════════════════════════════════════════
-     2b. TRUST STRIP
+     2b. TRUST STRIP — Simplified
 ══════════════════════════════════════════════════ -->
-<div class="bg-white border-b border-gray-100 py-6">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
-      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap flex-shrink-0">Au Sénégal · Côte d'Ivoire · Mali · Cameroun — adapté pour</p>
-      <div class="flex flex-wrap justify-center gap-2.5">
-        <span class="inline-flex items-center gap-1.5 bg-gray-50 border border-gray-200 text-gray-600 text-xs font-semibold px-3.5 py-1.5 rounded-full">
-          <svg class="w-3 h-3 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          Banques &amp; Assurances
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-gray-50 border border-gray-200 text-gray-600 text-xs font-semibold px-3.5 py-1.5 rounded-full">
-          <svg class="w-3 h-3 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          Administrations &amp; ONG
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-gray-50 border border-gray-200 text-gray-600 text-xs font-semibold px-3.5 py-1.5 rounded-full">
-          <svg class="w-3 h-3 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          PME &amp; Cabinets
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-gray-50 border border-gray-200 text-gray-600 text-xs font-semibold px-3.5 py-1.5 rounded-full">
-          <svg class="w-3 h-3 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          Industrie &amp; Logistique
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-gray-50 border border-gray-200 text-gray-600 text-xs font-semibold px-3.5 py-1.5 rounded-full">
-          <svg class="w-3 h-3 flex-shrink-0" style="color:#1A3A6B;" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"/></svg>
-          Mode local disponible
-        </span>
-      </div>
-    </div>
+<div class="bg-white border-b border-gray-100 py-5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-sm text-gray-500">
+      <span class="font-semibold text-navy">Conçu pour l'Afrique francophone</span>
+      <span class="mx-2 text-gray-300">·</span>
+      Sénégal · Côte d'Ivoire · Mali · Cameroun
+      <span class="mx-2 text-gray-300">·</span>
+      <span class="font-medium text-gray-600">Banques, PME, Administrations &amp; ONG</span>
+    </p>
   </div>
 </div>
 
 
-<!-- ══════════════════════════════════════════════
-     2c. DISCLAIMER — Ce que CyberScore est et n'est pas
-══════════════════════════════════════════════════ -->
-<section id="disclaimer" class="py-14 md:py-20 bg-gray-50 border-t border-b border-gray-100">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center mb-10 scroll-fade">
-      <h2 class="text-2xl md:text-3xl font-extrabold text-navy mb-3">Ce que CyberScore est — et ce qu'il n'est pas</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">La transparence, c'est aussi une forme de protection. Voici exactement ce que vous obtenez.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 scroll-fade">
-
-      <!-- N'EST PAS — neutral gray, not alarming red -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-7">
-        <div class="flex items-center gap-2.5 mb-5">
-          <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </div>
-          <span class="font-bold text-gray-600 text-sm uppercase tracking-wider">CyberScore N'EST PAS</span>
-        </div>
-        <ul class="space-y-3.5">
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-xs leading-none">✗</span>
-            <span class="text-gray-600 text-sm leading-relaxed">Un antivirus</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-xs leading-none">✗</span>
-            <span class="text-gray-600 text-sm leading-relaxed">Un pare-feu</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-xs leading-none">✗</span>
-            <span class="text-gray-600 text-sm leading-relaxed">Une solution de protection contre les attaques</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-xs leading-none">✗</span>
-            <span class="text-gray-600 text-sm leading-relaxed">Un remplacement des grandes solutions de sécurité informatique</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- EST — warm orange-accented -->
-      <div class="bg-white border-2 rounded-2xl p-7" style="border-color:rgba(232,98,10,0.25);">
-        <div class="flex items-center gap-2.5 mb-5">
-          <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,0.1);">
-            <svg class="w-4 h-4" style="color:#E8620A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-            </svg>
-          </div>
-          <span class="font-bold text-sm uppercase tracking-wider" style="color:#E8620A;">CyberScore EST</span>
-        </div>
-        <ul class="space-y-3.5">
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs leading-none text-white" style="background:#E8620A;">✓</span>
-            <span class="text-gray-700 text-sm leading-relaxed">Un outil de diagnostic de sécurité informatique</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs leading-none text-white" style="background:#E8620A;">✓</span>
-            <span class="text-gray-700 text-sm leading-relaxed">Un premier regard objectif sur vos ordinateurs Windows</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs leading-none text-white" style="background:#E8620A;">✓</span>
-            <span class="text-gray-700 text-sm leading-relaxed">Un score clair pour savoir où vous en êtes</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs leading-none text-white" style="background:#E8620A;">✓</span>
-            <span class="text-gray-700 text-sm leading-relaxed">Un point de départ pour agir — pas une fin en soi</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- Reassurance line -->
-    <p class="text-center text-sm text-gray-400 mt-8 scroll-fade">
-      CyberScore complète vos outils existants. Il ne les remplace pas.
-    </p>
-
-  </div>
-</section>
 
 
 <!-- ══════════════════════════════════════════════
      3. PROBLÈME
 ══════════════════════════════════════════════════ -->
-<section id="probleme" class="py-20 md:py-28 bg-white">
+<section id="probleme" class="py-20 md:py-28" style="background:linear-gradient(180deg,#ffffff 0%,#f8fafc 50%,#ffffff 100%);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14 scroll-fade">
       <div class="inline-block bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Le problème</div>
@@ -664,50 +565,47 @@
       </p>
     </div>
 
-    <!-- SCAN TERMINAL -->
+    <!-- SCAN DASHBOARD — Clean SaaS look, not terminal -->
     <div class="max-w-2xl mx-auto mb-20 scroll-fade">
-      <div class="bg-[#0D1117] rounded-2xl overflow-hidden shadow-2xl">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200">
         <!-- Title bar -->
-        <div class="flex items-center gap-2 px-5 py-3.5 bg-[#161B22] border-b border-white/5">
-          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <span class="ml-3 text-gray-500 text-xs font-mono">CyberScore Agent v2.0 — Simulation</span>
+        <div class="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-200">
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          <span class="text-gray-500 text-xs font-medium">Rapport de sécurité — Simulation</span>
         </div>
 
-        <div class="p-6 font-mono">
+        <div class="p-6">
           <!-- Stats -->
           <div class="flex gap-6 text-xs mb-6 text-gray-500">
-            <span>Ordinateurs analysés&nbsp;: <span class="text-green-400 font-semibold">1 247</span></span>
-            <span>Score moyen parc&nbsp;: <span class="text-amber-400 font-semibold">68/100</span></span>
+            <span>Ordinateurs analysés&nbsp;: <span class="text-green-600 font-semibold">1 247</span></span>
+            <span>Score moyen parc&nbsp;: <span class="text-amber-600 font-semibold">68/100</span></span>
           </div>
 
           <!-- Score counter -->
           <div class="text-center mb-5">
-            <div class="text-7xl font-black text-white leading-none" id="demoScore">0</div>
-            <div class="text-gray-600 text-xs mt-2">/ 100 — Score de sécurité global</div>
+            <div class="text-7xl font-black text-navy leading-none" id="demoScore">0</div>
+            <div class="text-gray-400 text-xs mt-2">/ 100 — Score de sécurité global</div>
           </div>
 
           <!-- Progress bar -->
           <div class="mb-5">
-            <div class="w-full bg-[#21262D] rounded-full h-1 overflow-hidden">
-              <div id="demoProgress" class="bg-brand h-1 rounded-full" style="width:0%"></div>
+            <div class="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+              <div id="demoProgress" class="bg-brand h-1.5 rounded-full" style="width:0%"></div>
             </div>
           </div>
 
-          <!-- Company name — Endowment Effect: personalizes result, increases commitment -->
+          <!-- Company name -->
           <div class="mb-4">
-            <label for="demoCompany" class="block text-gray-500 text-xs mb-1.5 font-mono">Votre entreprise (optionnel)</label>
+            <label for="demoCompany" class="block text-gray-500 text-xs mb-1.5 font-medium">Votre entreprise (optionnel)</label>
             <input id="demoCompany" type="text" placeholder="Ex : Cabinet Diallo &amp; Associés"
-              class="w-full rounded-lg px-3 py-2 text-sm font-mono focus:outline-none"
-              style="background:#21262D; border:1px solid rgba(255,255,255,0.08); color:#d1d5db;">
+              class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none border border-gray-200 text-gray-700 bg-white">
           </div>
 
           <!-- Checks -->
           <div id="demoChecks" class="space-y-1.5 mb-5 min-h-0"></div>
 
-          <!-- Micro-copy — sets expectation before click (reduces hesitation) -->
-          <p class="text-center text-gray-600 text-xs mb-3 font-mono">↓ Simulation sur un ordinateur test — 30 secondes, sans installation</p>
+          <!-- Micro-copy -->
+          <p class="text-center text-gray-400 text-xs mb-3">↓ Simulation sur un ordinateur test — 30 secondes, sans installation</p>
 
           <!-- Scan button -->
           <button id="scanBtn" onclick="demo.start()"
@@ -723,33 +621,33 @@
 
           <!-- Post-scan dashboard -->
           <div id="demoDashboard" class="hidden mt-4">
-            <div class="bg-[#161B22] rounded-xl p-4 mb-3 border border-white/5">
-              <!-- Company name displayed if entered — Endowment Effect payoff -->
-              <div id="demoCompanyLabel" class="text-center text-gray-500 text-xs font-mono mb-3 hidden"></div>
+            <div class="bg-gray-50 rounded-xl p-4 mb-3 border border-gray-100">
+              <!-- Company name displayed if entered -->
+              <div id="demoCompanyLabel" class="text-center text-gray-500 text-xs font-medium mb-3 hidden"></div>
               <div class="flex justify-around mb-3">
                 <div class="text-center">
                   <div class="text-3xl font-black text-brand">73</div>
-                  <div class="text-gray-600 text-xs mt-0.5">Score global</div>
+                  <div class="text-gray-500 text-xs mt-0.5">Score global</div>
                 </div>
-                <div class="w-px bg-white/10"></div>
+                <div class="w-px bg-gray-200"></div>
                 <div class="text-center">
-                  <div class="text-3xl font-black text-amber-400">60</div>
-                  <div class="text-gray-600 text-xs mt-0.5">Technique</div>
+                  <div class="text-3xl font-black text-amber-500">60</div>
+                  <div class="text-gray-500 text-xs mt-0.5">Technique</div>
                 </div>
-                <div class="w-px bg-white/10"></div>
+                <div class="w-px bg-gray-200"></div>
                 <div class="text-center">
-                  <div class="text-3xl font-black text-green-400">100</div>
-                  <div class="text-gray-600 text-xs mt-0.5">Usage</div>
+                  <div class="text-3xl font-black text-green-600">100</div>
+                  <div class="text-gray-500 text-xs mt-0.5">Usage</div>
                 </div>
               </div>
-              <div class="text-center text-red-400 text-xs font-semibold">⚠ 3 points critiques détectés — Action requise</div>
+              <div class="text-center text-red-500 text-xs font-semibold">⚠ 3 points critiques détectés — Action requise</div>
             </div>
             <button onclick="scrollToSection('contact'); gaTrack('demander_diagnostic')"
               class="w-full py-3 bg-brand hover:bg-brand-light text-white font-bold rounded-xl transition-colors duration-200 text-sm">
               Demander un vrai diagnostic →
             </button>
             <button onclick="demo.reset()"
-              class="w-full mt-2 py-2.5 border border-[#30363D] text-gray-500 hover:text-gray-300 hover:border-gray-500 rounded-xl transition-colors duration-200 text-sm font-medium">
+              class="w-full mt-2 py-2.5 border border-gray-200 text-gray-500 hover:text-gray-700 hover:border-gray-400 rounded-xl transition-colors duration-200 text-sm font-medium">
               ↺ Relancer la démo
             </button>
           </div>
@@ -760,7 +658,7 @@
     <!-- REAL SCREENSHOTS — tableau de bord DSI -->
     <div class="scroll-fade">
       <div class="text-center mb-10">
-        <div class="inline-block bg-white border border-gray-200 text-gray-500 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Produit réel</div>
+        <div class="inline-block bg-navy/10 text-navy text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Produit réel</div>
         <h3 class="text-2xl md:text-3xl font-extrabold text-navy mb-3">Ce que voit votre responsable informatique en temps réel</h3>
         <p class="text-gray-500 max-w-lg mx-auto">Tableau de bord centralisé pour suivre la sécurité de tous vos ordinateurs Windows, sans aucune expertise technique.</p>
       </div>
@@ -807,7 +705,7 @@
 <!-- ══════════════════════════════════════════════
      5. SOLUTION
 ══════════════════════════════════════════════════ -->
-<section id="solution" class="py-20 md:py-28 bg-white">
+<section id="solution" class="py-20 md:py-28" style="background:linear-gradient(180deg,#ffffff 0%,#f8fafc 50%,#ffffff 100%);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14 scroll-fade">
       <div class="inline-block bg-green-50 text-green-700 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Comment ça marche</div>
@@ -817,11 +715,11 @@
 
     <div class="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
       <div class="hidden md:block absolute top-12 left-1/3 right-1/3 h-0.5"
-           style="background: linear-gradient(to right, rgba(232,98,10,.15), #E8620A, rgba(232,98,10,.15));"></div>
+           style="background: linear-gradient(to right, rgba(217,119,6,.15), #D97706, rgba(217,119,6,.15));"></div>
 
       <div class="scroll-fade text-center">
         <div class="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6 relative"
-             style="background:rgba(232,98,10,.1);">
+             style="background:rgba(217,119,6,.1);">
           <svg class="w-10 h-10 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
@@ -833,7 +731,7 @@
 
       <div class="scroll-fade text-center">
         <div class="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6 relative"
-             style="background:rgba(232,98,10,.1);">
+             style="background:rgba(217,119,6,.1);">
           <svg class="w-10 h-10 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/>
           </svg>
@@ -845,7 +743,7 @@
 
       <div class="scroll-fade text-center">
         <div class="w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-6 relative"
-             style="background:rgba(232,98,10,.1);">
+             style="background:rgba(217,119,6,.1);">
           <svg class="w-10 h-10 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
           </svg>
@@ -860,40 +758,40 @@
 
 
 <!-- ══════════════════════════════════════════════
-     6. FONCTIONNALITÉS
+     6. FONCTIONNALITÉS — Light mode
 ══════════════════════════════════════════════════ -->
-<section id="fonctionnalites" class="py-20 md:py-28 bg-navy" style="background-color:#1A3A6B;">
+<section id="fonctionnalites" class="py-20 md:py-28 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-14 scroll-fade">
-      <div class="inline-block bg-white/10 text-white/70 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4 border border-white/10">
+      <div class="inline-block bg-navy/10 text-navy text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
         Fonctionnalités
       </div>
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Tout ce dont vous avez besoin</h2>
-      <p class="text-lg text-white/50 max-w-xl mx-auto">Une couverture complète, sans la complexité.</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-navy mb-4">Tout ce dont vous avez besoin</h2>
+      <p class="text-lg text-gray-500 max-w-xl mx-auto">Une couverture complète, sans la complexité.</p>
     </div>
 
     <!-- Feature columns + screenshot -->
     <div class="grid lg:grid-cols-5 gap-8 items-start mb-16">
 
       <!-- Left: technical checks -->
-      <div class="lg:col-span-2 scroll-fade bg-white/5 border border-white/10 rounded-2xl p-7" style="background:rgba(255,255,255,0.06);">
-        <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
-          <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="lg:col-span-2 scroll-fade bg-white border border-gray-200 rounded-2xl p-7 shadow-sm">
+        <h3 class="text-navy font-bold text-lg mb-6 flex items-center gap-2">
+          <span class="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
           </span>
           Contrôles automatisés
         </h3>
         <ul class="space-y-2.5">
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Pare-feu Windows</li>
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Chiffrement BitLocker</li>
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Antivirus actif &amp; à jour</li>
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Contrôle de compte (UAC)</li>
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Accès distant (RDP)</li>
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Mises à jour système</li>
-          <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-5 h-5 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Politique de mots de passe</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Pare-feu Windows</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Chiffrement BitLocker</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Antivirus actif &amp; à jour</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Contrôle de compte (UAC)</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Accès distant (RDP)</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Mises à jour système</li>
+          <li class="flex items-center gap-3 text-gray-600 text-sm"><span class="w-5 h-5 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Politique de mots de passe</li>
         </ul>
       </div>
 
@@ -910,29 +808,29 @@
                alt="Checks techniques CyberScore — Firewall conforme, Antivirus conforme, Verrouillage à corriger"
                class="w-full block" loading="lazy" width="1280" height="720">
         </div>
-        <p class="text-white/40 text-sm text-center mt-3">Tableau des checks techniques réels — statut, sévérité, risque, impact</p>
+        <p class="text-gray-500 text-sm text-center mt-3">Tableau des checks techniques réels — statut, sévérité, risque, impact</p>
       </div>
     </div>
 
     <!-- Intelligence & rapport row -->
-    <div class="scroll-fade bg-white/5 border border-white/10 rounded-2xl p-7" style="background:rgba(255,255,255,0.06);">
-      <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
-        <span class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(232,98,10,.25);">
-          <svg class="w-4 h-4" style="color:#E8620A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="scroll-fade bg-white border border-gray-200 rounded-2xl p-7 shadow-sm">
+      <h3 class="text-navy font-bold text-lg mb-6 flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg flex items-center justify-center bg-orange-50">
+          <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
         </span>
         Intelligence &amp; rapport IA
       </h3>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Score 0–100 clair</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Rapport PDF professionnel</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Recommandations IA en français</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Tableau de bord DSI</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Historique &amp; évolution</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Alertes de dégradation</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Export PDF &amp; CSV</div>
-        <div class="flex items-center gap-2.5 text-white/80 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,.25);"><svg class="w-3 h-3" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Mode local hors-ligne</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Score 0–100 clair</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Rapport PDF professionnel</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Recommandations IA en français</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Tableau de bord DSI</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Historique &amp; évolution</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Alertes de dégradation</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Export PDF &amp; CSV</div>
+        <div class="flex items-center gap-2.5 text-gray-600 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 bg-navy/10"><svg class="w-3 h-3 text-navy" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>Mode local hors-ligne</div>
       </div>
     </div>
 
@@ -943,7 +841,7 @@
 <!-- ══════════════════════════════════════════════
      6b. MID-PAGE CTA (peak-interest moment)
 ══════════════════════════════════════════════════ -->
-<div class="py-14" style="background:linear-gradient(135deg, #0B1929 0%, #1A3A6B 100%);">
+<div class="py-14" style="background:linear-gradient(135deg, #1A3A6B 0%, #2d5a9e 100%);">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row items-center justify-between gap-8">
       <div class="text-white text-center md:text-left">
@@ -958,8 +856,8 @@
         <a href="#contact"
            onclick="gaTrack('mid_page_cta')"
            class="inline-flex items-center gap-2 text-white font-bold rounded-xl transition-colors duration-200 whitespace-nowrap"
-           style="background:#E8620A; padding:15px 32px; font-size:1rem; text-decoration:none;"
-           onmouseover="this.style.background='#F07A2C'" onmouseout="this.style.background='#E8620A'">
+           style="background:#D97706; padding:15px 32px; font-size:1rem; text-decoration:none;"
+           onmouseover="this.style.background='#F59E0B'" onmouseout="this.style.background='#D97706'">
           Obtenir mon diagnostic gratuit
           <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -1004,7 +902,7 @@
         </div>
         <p class="text-gray-600 leading-relaxed flex-1 mb-6">"On a lancé le scan sur 8 postes, en 10 minutes on savait exactement où agir. Le rapport en français nous a permis de présenter ça à la DG sans traduction technique."</p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-navy flex items-center justify-center text-white font-bold text-sm flex-shrink-0">MK</div>
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#D97706 0%,#F59E0B 100%);">MK</div>
           <div>
             <div class="font-semibold text-navy text-sm">Mamadou Konaté</div>
             <div class="text-gray-400 text-xs">Directeur IT · Cabinet comptable, Bamako</div>
@@ -1026,7 +924,7 @@
         </div>
         <p class="text-gray-600 leading-relaxed flex-1 mb-6">"Nos ordinateurs stockent des données clients. On pensait être corrects — le premier scan a révélé un score de 41. En une semaine avec les recommandations, on était à 74. Sans embaucher personne."</p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:#E8620A;">AS</div>
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#D97706 0%,#F59E0B 100%);">AS</div>
           <div>
             <div class="font-semibold text-navy text-sm">Aminata Sow</div>
             <div class="text-gray-400 text-xs">DG · Cabinet d'expertise, Dakar</div>
@@ -1048,7 +946,7 @@
         </div>
         <p class="text-gray-600 leading-relaxed flex-1 mb-6">"Le mode local a été décisif pour nous. Notre direction ne voulait rien envoyer en cloud. CyberScore fonctionne en totale autonomie, les résultats restent chez nous. Simple, rapide, en français."</p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:#122952;">IT</div>
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#D97706 0%,#F59E0B 100%);">IT</div>
           <div>
             <div class="font-semibold text-navy text-sm">Ibrahim Touré</div>
             <div class="text-gray-400 text-xs">Responsable IT · Institution, Abidjan</div>
@@ -1068,7 +966,7 @@
     <p class="text-lg font-semibold text-navy mb-4">Ces résultats sont disponibles pour votre entreprise — dès ce mois-ci.</p>
     <a href="#tarifs"
        class="inline-flex items-center gap-2 font-bold rounded-xl transition-colors duration-200 text-white text-sm"
-       style="background:#E8620A; padding:12px 24px;">
+       style="background:#D97706; padding:12px 24px;">
       Voir les tarifs
       <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -1084,7 +982,7 @@
 <section id="tarifs" class="py-20 md:py-28 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14 scroll-fade">
-      <div class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(232,98,10,.1);color:#E8620A;">Tarifs</div>
+      <div class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(217,119,6,.1);color:#D97706;">Tarifs</div>
       <h2 class="text-3xl md:text-4xl font-extrabold text-navy mb-4">Transparent, sans surprise</h2>
       <p class="text-lg text-gray-500 max-w-xl mx-auto">Pas d'engagement. Pas d'infrastructure. Résiliable à tout moment.</p>
     </div>
@@ -1101,7 +999,7 @@
           <div class="text-2xl font-black text-gray-300">vs</div>
         </div>
         <div class="p-5 bg-orange-50 border-t md:border-t-0 md:border-l border-gray-200">
-          <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:#E8620A;">CyberScore (mensuel, continu)</div>
+          <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:#D97706;">CyberScore (mensuel, continu)</div>
           <div class="text-2xl font-black" style="color:#1A3A6B;">dès 25 000 FCFA/mois</div>
           <div class="text-xs text-gray-500 mt-1">Suivi en temps réel · Sans expert · En français</div>
         </div>
@@ -1120,7 +1018,7 @@
           </div>
           <div class="text-sm text-gray-400">Jusqu'à 10 ordinateurs</div>
           <!-- Mental Accounting: per-seat reframe makes the price feel trivial -->
-          <div class="text-xs font-semibold mt-1" style="color:#E8620A;">soit 2 500 FCFA / ordinateur / mois</div>
+          <div class="text-xs font-semibold mt-1" style="color:#D97706;">soit 2 500 FCFA / ordinateur / mois</div>
         </div>
         <ul class="space-y-3 mb-8 flex-1">
           <li class="flex items-center gap-2.5 text-sm text-gray-600"><svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Scan complet Windows</li>
@@ -1133,26 +1031,26 @@
       </div>
 
       <!-- PME (featured) -->
-      <div class="scroll-fade pricing-featured border-2 rounded-2xl p-7 flex flex-col relative bg-white" style="border-color:#E8620A;">
+      <div class="scroll-fade pricing-featured border-2 rounded-2xl p-8 flex flex-col relative bg-white md:-mt-4 md:mb-4" style="border-color:#D97706;">
         <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span class="text-white text-xs font-black px-5 py-1.5 rounded-full uppercase tracking-wide whitespace-nowrap" style="background:#E8620A;">Recommandé</span>
+          <span class="text-white text-xs font-black px-5 py-1.5 rounded-full uppercase tracking-wide whitespace-nowrap" style="background:#D97706;">Recommandé</span>
         </div>
         <div class="mb-6">
-          <div class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#E8620A;">PME</div>
+          <div class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#D97706;">PME</div>
           <div class="flex items-baseline gap-1 mb-1">
             <span class="text-4xl font-black text-navy">60 000</span>
             <span class="text-gray-400 font-medium">FCFA/mois</span>
           </div>
           <div class="text-sm text-gray-400">Jusqu'à 50 ordinateurs</div>
           <!-- Mental Accounting: per-seat reframe -->
-          <div class="text-xs font-semibold mt-1" style="color:#E8620A;">soit 1 200 FCFA / ordinateur / mois</div>
+          <div class="text-xs font-semibold mt-1" style="color:#D97706;">soit 1 200 FCFA / ordinateur / mois</div>
         </div>
         <ul class="space-y-3 mb-8 flex-1">
-          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Tout le plan Starter</li>
-          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Tableau de bord centralisé</li>
-          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Historique 12 mois</li>
-          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Support prioritaire</li>
-          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#E8620A;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>5 accès administrateurs</li>
+          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#D97706;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Tout le plan Starter</li>
+          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#D97706;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Tableau de bord centralisé</li>
+          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#D97706;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Historique 12 mois</li>
+          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#D97706;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Support prioritaire</li>
+          <li class="flex items-center gap-2.5 text-sm text-gray-700 font-medium"><svg class="w-4 h-4 flex-shrink-0" style="color:#D97706;" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>5 accès administrateurs</li>
         </ul>
         <a href="#contact" class="block w-full py-3 text-center bg-brand hover:bg-brand-light text-white font-bold rounded-xl transition-colors duration-200 text-sm">Démarrer mon diagnostic</a>
         <p class="text-center text-xs text-gray-400 mt-2">Paiement après validation · Résiliable</p>
@@ -1184,14 +1082,14 @@
     <!-- Gentle urgency — honest (small team, personal onboarding), not fake scarcity -->
     <div class="max-w-5xl mx-auto mt-10 scroll-fade">
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 text-center sm:text-left bg-orange-50 border border-orange-100 rounded-2xl px-6 py-4">
-        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(232,98,10,0.15);">
-          <svg class="w-4 h-4" style="color:#E8620A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(217,119,6,0.15);">
+          <svg class="w-4 h-4" style="color:#D97706;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
         <p class="text-sm text-gray-600">
           <span class="font-semibold text-gray-800">Chaque client est accompagné personnellement</span> lors de la mise en place — les créneaux d'onboarding sont limités.
-          <a href="#contact" class="font-bold underline underline-offset-2 ml-1" style="color:#E8620A;">Réserver le vôtre</a>
+          <a href="#contact" class="font-bold underline underline-offset-2 ml-1" style="color:#D97706;">Réserver le vôtre</a>
         </p>
       </div>
     </div>
@@ -1253,33 +1151,17 @@
           <p class="text-white/40 text-xs font-bold uppercase tracking-widest mb-4">Ce qui se passe après votre message</p>
           <div class="space-y-3">
             <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#E8620A;">1</div>
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#1A3A6B;">1</div>
               <p class="text-white/60 text-sm leading-relaxed">On vous répond sous 24h pour fixer un appel de 20 min</p>
             </div>
             <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#E8620A;">2</div>
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#1A3A6B;">2</div>
               <p class="text-white/60 text-sm leading-relaxed">Diagnostic gratuit sur vos ordinateurs — vous voyez votre score</p>
             </div>
             <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#E8620A;">3</div>
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black text-white" style="background:#1A3A6B;">3</div>
               <p class="text-white/60 text-sm leading-relaxed">Vous décidez librement — sans pression, sans engagement</p>
             </div>
-          </div>
-        </div>
-
-        <!-- Social proof — geographic + sector specificity (Liking/Similarity bias) -->
-        <div class="mt-8 pt-8 border-t border-white/10">
-          <p class="text-white/40 text-xs font-bold uppercase tracking-widest mb-4">Déjà utilisé par des équipes IT au</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">🇸🇳 Sénégal</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">🇨🇮 Côte d'Ivoire</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">🇲🇱 Mali</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">🇨🇲 Cameroun</span>
-          </div>
-          <div class="flex flex-wrap gap-2 mt-2">
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs px-3 py-1.5 rounded-full">Banques &amp; Assurances</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs px-3 py-1.5 rounded-full">PME &amp; Cabinets</span>
-            <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 text-white/60 text-xs px-3 py-1.5 rounded-full">ONG</span>
           </div>
         </div>
 
@@ -1427,7 +1309,7 @@
 ══════════════════════════════════════════════════ -->
 <button id="chatToggle" onclick="chatbot.toggle()" aria-label="Ouvrir le chat" aria-expanded="false" aria-controls="chatPanel"
   class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-95"
-  style="background:#E8620A;">
+  style="background:#D97706;">
   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
@@ -1483,7 +1365,7 @@
     <button id="chatSend" onclick="chatbot.sendFromInput()"
             aria-label="Envoyer"
             class="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
-            style="background:#E8620A;">
+            style="background:#D97706;">
       <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
       </svg>
@@ -1740,7 +1622,7 @@
       div.className = type === 'user'
         ? 'self-end text-white text-sm rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] leading-relaxed'
         : 'self-start bg-gray-100 text-gray-800 text-sm rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[85%] leading-relaxed';
-      if (type === 'user') div.style.background = '#E8620A';
+      if (type === 'user') div.style.background = '#D97706';
       div.textContent = text;  // textContent — never innerHTML with user input
       msgs.appendChild(div);
       msgs.scrollTop = msgs.scrollHeight;
@@ -1840,7 +1722,7 @@
         var btn = document.createElement('button');
         btn.className = 'text-xs bg-white border border-gray-200 text-gray-600 rounded-full px-3 py-1.5 transition-colors duration-150 text-left';
         btn.textContent = q;
-        btn.onmouseenter = function() { btn.style.borderColor = '#E8620A'; btn.style.color = '#E8620A'; };
+        btn.onmouseenter = function() { btn.style.borderColor = '#D97706'; btn.style.color = '#D97706'; };
         btn.onmouseleave = function() { btn.style.borderColor = ''; btn.style.color = ''; };
         btn.addEventListener('click', function() { self.send(q); });
         chips.appendChild(btn);
