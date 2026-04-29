@@ -15,7 +15,7 @@
   <meta property="og:url"         content="https://cyberscore.africa">
   <meta property="og:title"       content="CyberScore — Sécurité informatique pour les entreprises d'Afrique francophone">
   <meta property="og:description" content="Analysez la sécurité de vos ordinateurs Windows en 3 minutes. Score clair, recommandations concrètes en français — sans informaticien dédié.">
-  <meta property="og:image"       content="https://cyberscore.africa/og-image.png">
+  <meta property="og:image"       content="https://cyberscore.africa/og-image.webp">
   <meta name="twitter:card"       content="summary_large_image">
   <meta name="twitter:title"      content="CyberScore — Sécurité informatique pour les entreprises d'Afrique francophone">
   <meta name="twitter:description" content="Analysez la sécurité de vos ordinateurs Windows en 3 minutes. Score clair, recommandations concrètes en français — sans informaticien dédié.">
@@ -27,10 +27,10 @@
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 
   <!-- Favicon -->
-  <link rel="icon" href="logo.png">
+  <link rel="icon" href="logo.webp">
 
   <!-- Preload hero LCP image -->
-  <link rel="preload" as="image" href="assets/cyberscore5.PNG" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/cyberscore5.webp" fetchpriority="high">
 
   <!-- Non-blocking font loading -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -154,7 +154,7 @@
     "@type": "Organization",
     "name": "CyberScore",
     "url": "https://cyberscore.africa",
-    "logo": "https://cyberscore.africa/logo.png",
+    "logo": "https://cyberscore.africa/logo.webp",
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "teemaabdoulaye@gmail.com",
@@ -255,7 +255,7 @@
 
       <!-- Logo — blends seamlessly into dark bg, no visible border -->
       <a href="#" class="flex-shrink-0">
-        <img src="logo.png" alt="CyberScore" class="h-10 w-auto">
+        <img src="logo.webp" alt="CyberScore" class="h-10 w-auto">
       </a>
 
       <!-- Desktop links -->
@@ -436,7 +436,7 @@
                 LIVE
               </div>
             </div>
-            <img src="assets/cyberscore5.PNG"
+            <img src="assets/cyberscore5.webp"
                  alt="CyberScore — résultats employé affichant un score de 79/100, technique 65 et comportement 100, avec 4 points à corriger"
                  class="w-full block"
                  width="960" height="640" fetchpriority="high">
@@ -673,7 +673,7 @@
               <span class="browser-dot bg-green-400"></span>
               <div class="browser-bar">cyberscore.africa/dashboard</div>
             </div>
-            <img src="assets/cyberscore6.PNG"
+            <img src="assets/cyberscore6.webp"
                  alt="Tableau de bord CyberScore — vue parc, 1 ordinateur, score 59.2/100"
                  class="w-full block" loading="lazy" width="1280" height="720">
           </div>
@@ -689,7 +689,7 @@
               <span class="browser-dot bg-green-400"></span>
               <div class="browser-bar">cyberscore.africa/machines/DESKTOP-O9SMKB2</div>
             </div>
-            <img src="assets/cyberscore1.PNG"
+            <img src="assets/cyberscore1.webp"
                  alt="Détail machine CyberScore — score 59.22, technique 65.0, usage 50.56"
                  class="w-full block" loading="lazy" width="1280" height="720">
           </div>
@@ -804,7 +804,7 @@
             <span class="browser-dot bg-green-400"></span>
             <div class="browser-bar">cyberscore.africa/machines/checks</div>
           </div>
-          <img src="assets/cyberscore4.PNG"
+          <img src="assets/cyberscore4.webp"
                alt="Checks techniques CyberScore — Firewall conforme, Antivirus conforme, Verrouillage à corriger"
                class="w-full block" loading="lazy" width="1280" height="720">
         </div>
@@ -1274,7 +1274,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-3 gap-8 mb-8">
       <div>
-        <img src="logo.png" alt="CyberScore" class="h-12 w-auto mb-3" loading="lazy" width="200" height="48">
+        <img src="logo.webp" alt="CyberScore" class="h-12 w-auto mb-3" loading="lazy" width="200" height="48">
         <p class="text-sm leading-relaxed">Sécurité informatique accessible pour les entreprises et administrations d'Afrique francophone.</p>
         <p class="text-xs mt-2 italic" style="color:rgba(255,255,255,0.3);">Mesurez. Comprenez. Protégez.</p>
       </div>
@@ -1324,7 +1324,7 @@
   <!-- Header -->
   <div class="flex items-center justify-between px-4 py-3.5 flex-shrink-0" style="background:#1A3A6B;">
     <div class="flex items-center gap-2.5">
-      <img src="logo.png" alt="" class="h-7 w-auto">
+      <img src="logo.webp" alt="" class="h-7 w-auto">
       <div>
         <div class="text-white font-semibold text-sm">Assistant CyberScore</div>
         <div class="flex items-center gap-1.5">
@@ -1675,29 +1675,29 @@
           body: JSON.stringify({ message: text })
         });
 
-        var data = await res.json();
-        self.hideTyping();
+        if (!res.ok) {
+          var errData = await res.json().catch(function() { return {}; });
+          var errMsg = errData.error || 'Erreur ' + res.status;
 
-        // If the server returned an error flag, use the static fallback
-        if (data && data.reply) {
-          self.addMsg(data.reply, 'bot');
+          // If rate-limited or service unavailable, use static fallback
+          if (res.status === 429 || res.status === 503) {
+            usedFallback = true;
+            self.hideTyping();
+            self.addMsg(self.staticFallback(text), 'bot');
+          } else {
+            self.hideTyping();
+            self.addMsg('Désolé, une erreur est survenue. ' + errMsg, 'bot');
+          }
         } else {
-          usedFallback = true;
+          var data = await res.json();
+          self.hideTyping();
+          self.addMsg(data.reply || self.staticFallback(text), 'bot');
+        }
+      } catch (err) {
+        if (!usedFallback) {
+          self.hideTyping();
           self.addMsg(self.staticFallback(text), 'bot');
         }
-
-      } catch (err) {
-        // Network failure (offline, function not deployed, etc.) — use static FAQ
-        self.hideTyping();
-        usedFallback = true;
-        self.addMsg(self.staticFallback(text), 'bot');
-      }
-
-      // If we fell back, add a soft note so the user knows
-      if (usedFallback) {
-        setTimeout(function() {
-          self.addMsg('💡 Réponse automatique — pour une question précise, utilisez le formulaire de contact.', 'bot');
-        }, 400);
       }
 
       this.busy = false;
