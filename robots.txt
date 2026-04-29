@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /politique-confidentialite.html
+Disallow: /mentions-legales.html
+
+Sitemap: https://cyberscore.africa/sitemap.xml

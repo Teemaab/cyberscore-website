@@ -1,6 +1,28 @@
 // Uses Node's built-in https — no fetch, no AbortSignal, works on Node 14/16/18+
 const https = require('https');
 
+// ── Simple per-instance rate limiter ──────────────────────────────
+// Netlify Functions are stateless; this limits abuse per instance.
+// For stronger protection, add Cloudflare or Upstash in front.
+var requestLog = new Map();
+
+function isRateLimited(clientIP) {
+  var now = Date.now();
+  var windowMs = 60 * 1000;   // 1 minute
+  var maxReq = 10;            // 10 requests per minute per IP
+
+  var record = requestLog.get(clientIP);
+  if (!record || now > record.resetTime) {
+    requestLog.set(clientIP, { count: 1, resetTime: now + windowMs });
+    return false;
+  }
+
+  record.count++;
+  requestLog.set(clientIP, record);
+  return record.count > maxReq;
+}
+
+// ── Prompt ────────────────────────────────────────────────────────
 const SYSTEM_PROMPT = `Tu es l'assistant officiel de CyberScore.
 CyberScore est un outil de diagnostic de sécurité informatique pour les PMEs d'Afrique francophone.
 
@@ -80,6 +102,16 @@ function callDeepSeek(apiKey, userMessage) {
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
+
+  // ── Rate limiting ───────────────────────────────────────────────
+  var clientIP = (event.headers['x-forwarded-for'] || event.headers['client-ip'] || 'unknown').split(',')[0].trim();
+  if (isRateLimited(clientIP)) {
+    return {
+      statusCode: 429,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ reply: 'Trop de messages envoyés. Veuillez patienter une minute ou contactez-nous à teemaabdoulaye@gmail.com' }),
+    };
   }
 
   var apiKey = process.env.DEEPSEEK_API_KEY;
